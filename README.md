@@ -32,5 +32,6 @@ This repository contains the mbed blinky source.
      ```sh
      $ mbed compile -t GCC_ARM -m K64F -f
      ```
-   Notice that the `-f` option causes the program to be loaded to flash and executed.
+   Notice that the `-f` (`--flash`) option causes the program to be loaded 
+   to flash and executed.
 
