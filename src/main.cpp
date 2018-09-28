@@ -1,6 +1,7 @@
 #include "mbed.h"
 #include "C12832.h"
 #include "MMA7660.h"
+#include "LM75B.h"
 #include <stdio.h>
 
 DigitalOut led1(LED1);
@@ -16,6 +17,8 @@ char symbols[] = {'C', 'U', 'D', 'L', 'R'};
 char joystickVal;
 MMA7660 accel(D14, D15);
 float accelVal[3];
+LM75B temp(D14, D15);
+float tempVal;
 
 int main() {
     int i;
@@ -36,6 +39,7 @@ int main() {
         accelVal[0] = accel.x();
         accelVal[1] = accel.y();
         accelVal[2] = accel.z();
+        tempVal = temp.read();
         led1 = !led1;
         led_app_green = !led_app_green;
         lcd.locate(0, 0);
@@ -50,7 +54,8 @@ int main() {
         lcd.printf("Y: %0.2f", accelVal[1]);
         lcd.locate(43, 16);
         lcd.printf("Z: %0.2f", accelVal[2]);
-
+        lcd.locate(86, 0);
+        lcd.printf("T: %02.2f", tempVal);
         wait(0.5);
     }
 }
